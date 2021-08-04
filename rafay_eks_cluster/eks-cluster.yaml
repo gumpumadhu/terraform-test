@@ -10,7 +10,7 @@ spec:
 apiVersion: rafay.io/v1alpha5
 kind: ClusterConfig
 metadata:
-  name: infra-test-1
+  name: infra-test-utkarsh
   region: us-west-2
   version: "1.19"
 nodeGroups:
