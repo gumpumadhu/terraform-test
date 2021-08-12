@@ -18,6 +18,7 @@ do
     echo -e " Rechecking after 60 sec  "
   else
     echo -e " !! Cluster is up !!  "
+    sleep 120
     exit 1
   fi
 done
