@@ -12,7 +12,7 @@ do
     break
   fi
   CLUSTER_STATUS_ITERATIONS=$((CLUSTER_STATUS_ITERATIONS+1))
-  CLUSTER_STATUS=`sudo kubectl get pods -A`
+  CLUSTER_STATUS=`kubectl get pods -A`
   echo $CLUSTER_STATUS
   if [[ $CLUSTER_STATUS != *"rafay-system   controller-manager"* ]];
   then
