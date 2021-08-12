@@ -1,7 +1,7 @@
 kind: Cluster
 metadata:
   name: rauto-infraprovisioner-eks-56647
-  project: <project>
+  project: defaultproject
 spec:
   blueprint: default
   cloudprovider: rauto-cloudprovider-56647
