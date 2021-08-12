@@ -1,0 +1,38 @@
+kind: Cluster
+metadata:
+  name: rauto-infraprovisioner-eks-52958
+  project: <project>
+spec:
+  blueprint: default
+  cloudprovider: rauto-cloudprovider-52958
+  type: eks
+---
+apiVersion: rafay.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: rauto-infraprovisioner-eks-52958
+  region: us-west-1
+  version: "1.20"
+nodeGroups:
+- amiFamily: AmazonLinux2
+  desiredCapacity: 1
+  iam:
+    withAddonPolicies:
+      albIngress: true
+      autoScaler: true
+      efs: true
+      externalDNS: true
+      imageBuilder: true
+  instanceType: t3.xlarge
+  maxSize: 1
+  minSize: 1
+  name: rauto-infraprovisioner-eks-52958-ng
+  volumeSize: 80
+  volumeType: gp3
+vpc:
+  cidr: 192.168.0.0/16
+  clusterEndpoints:
+    privateAccess: true
+    publicAccess: false
+  nat:
+    gateway: Single
