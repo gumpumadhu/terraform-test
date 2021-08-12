@@ -4,7 +4,7 @@ CLUSTER_STATUS=``
 # shellcheck disable=SC1073
 CMD=`sudo su`
 echo $CMD
-while True
+while true
 do
   sleep 60
   if [[ $CLUSTER_STATUS_ITERATIONS -ge 30 ]];
