@@ -20,7 +20,7 @@ CLUSTER_HEALTH_ITERATIONS=1
 sleep 60
 CLUSTER_STATUS=`./rctl get cluster ${CLUSTER_NAME} -o json |jq '.status'|cut -d'"' -f2`
 PROVISION_STATUS=`./rctl get cluster ${CLUSTER_NAME} -o json |jq '.provision.status' |cut -d'"' -f2`
-while [ "$CLUSTER_STATUS" != "READY"]  &&  [ $PROVISION_STATUS !="CLUSTER_PROVISION_COMPLETE"]
+while [ "$CLUSTER_STATUS" != "READY"]  &&  [ "$PROVISION_STATUS" != "CLUSTER_PROVISION_COMPLETE"]
 do
   sleep 60
   if [ $CLUSTER_STATUS_ITERATIONS -ge 50 ];
