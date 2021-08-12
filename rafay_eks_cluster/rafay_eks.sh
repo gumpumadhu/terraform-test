@@ -5,7 +5,7 @@ CLUSTER_STATUS=``
 while [ "$CLUSTER_STATUS" != "READY" ]
 do
   sleep 60
-  if [[ $CLUSTER_STATUS_ITERATIONS -ge 10 ]];
+  if [[ $CLUSTER_STATUS_ITERATIONS -ge 30 ]];
   then
     break
   fi
