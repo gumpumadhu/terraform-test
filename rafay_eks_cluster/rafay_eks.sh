@@ -2,7 +2,9 @@
 
 CLUSTER_STATUS=``
 # shellcheck disable=SC1073
-while [ "$CLUSTER_STATUS" != "READY" ]
+cmd=`sudo su`
+echo $CLUSTER_STATUS
+while True
 do
   sleep 60
   if [[ $CLUSTER_STATUS_ITERATIONS -ge 50 ]];
@@ -10,7 +12,7 @@ do
     break
   fi
   CLUSTER_STATUS_ITERATIONS=$((CLUSTER_STATUS_ITERATIONS+1))
-  CLUSTER_STATUS=`kubectl get pods -A`
+  CLUSTER_STATUS=`sudo kubectl get pods -A`
   echo $CLUSTER_STATUS
   if [[ $CLUSTER_STATUS != *"rafay-system   controller-manager"* ]];
   then
