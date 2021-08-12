@@ -80,6 +80,6 @@ then
 fi
 if [[ $CLUSTER_HEALTH == 1 ]];
 then
-    sleep 120
+    sleep 150
     echo "[+] Cluster Provisioned Successfully and is Healthy"
 fi
