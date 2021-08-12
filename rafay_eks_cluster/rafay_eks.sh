@@ -2,8 +2,8 @@
 
 CLUSTER_STATUS=``
 # shellcheck disable=SC1073
-cmd=`sudo su`
-echo $CLUSTER_STATUS
+CMD=`sudo su`
+echo $CMD
 while True
 do
   sleep 60
