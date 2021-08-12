@@ -21,4 +21,4 @@ do
     exit 1
   fi
 done
-echo -e " !! Cluster not up after 600 sec!!  "
+echo -e " !! Cluster not up after 30 min!!  "
