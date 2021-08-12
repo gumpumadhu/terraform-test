@@ -5,7 +5,7 @@ CLUSTER_STATUS=``
 while [ "$CLUSTER_STATUS" != "READY" ]
 do
   sleep 60
-  if [[ $CLUSTER_STATUS_ITERATIONS -ge 30 ]];
+  if [[ $CLUSTER_STATUS_ITERATIONS -ge 50 ]];
   then
     break
   fi
@@ -22,4 +22,4 @@ do
     exit 1
   fi
 done
-echo -e " !! Cluster not up after 30 min!!  "
+echo -e " !! Cluster not up after 50 min!!  "
