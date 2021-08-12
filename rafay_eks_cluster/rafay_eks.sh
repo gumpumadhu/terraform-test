@@ -2,7 +2,8 @@
 
 RCTL_FILE="rctl-linux-amd64.tar.bz2"
 #RCTL_URL="https://rafay-prod-cli.s3-us-west-2.amazonaws.com/publish/rctl-linux-amd64.tar.bz2"
-RCTL_URL="https://rctl.s3-us-west-1.amazonaws.com/origin/master-283/rctl-linux-amd64.tar.bz2"
+#RCTL_URL="https://rctl.s3-us-west-1.amazonaws.com/origin/master-283/rctl-linux-amd64.tar.bz2"
+RCTL_URL="https://s3.amazonaws.com/rafay-cli/publish/rctl-linux-amd64.tar.bz2"
 
 wget $RCTL_URL
 if [ $? -eq 0 ];
@@ -13,26 +14,6 @@ tar -xvf $RCTL_FILE
 
 #Check rctl version
 ./rctl version
-
-#Clone spec repo
-GIT_URL=$(echo $REPO_URL | sed "s/https:\/\//https:\/\/$REPO_USER:$REPO_PASSWORD@/")
-git clone $GIT_URL
-if [ $? -ne 0 ];
-then
-    echo "[+] Failed to clone repo: $REPO_URL"
-    exit 1
-fi
-
-#Create EKS cluster
-./rctl create cluster eks -f $REPO_NAME/$CLUSTER_SPEC
-#./rctl apply -f $REPO_NAME/$CLUSTER_SPEC
-if [ $? -eq 0 ];
-then
-    echo "[+] Successfully Created EKS cluster: $CLUSTER_NAME"
-else
-    echo "[+] Failed to create EKS cluster: $CLUSTER_NAME"
-    exit 1
-fi
 
 CLUSTER_STATUS_ITERATIONS=1
 CLUSTER_HEALTH_ITERATIONS=1
