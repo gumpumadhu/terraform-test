@@ -12,6 +12,7 @@ tar -xvf $RCTL_FILE
 
 CLUSTER_STATUS_ITERATIONS=1
 CLUSTER_HEALTH_ITERATIONS=1
+PROVISION_STATUS_ITERATIONS=1
 sleep 60
 CLUSTER_STATUS=`./rctl get cluster ${CLUSTER_NAME} -o json |jq '.status'|cut -d'"' -f2`
 PROVISION_STATUS=`./rctl get cluster ${CLUSTER_NAME} -o json |jq '.provision.status' |cut -d'"' -f2`
@@ -77,6 +78,34 @@ then
 fi
 if [[ $CLUSTER_HEALTH == 1 ]];
 then
-    sleep 150
     echo "[+] Cluster Provisioned Successfully and is Healthy"
 fi
+sleep 200
+PROVISION_STATUS=`./rctl get cluster ${CLUSTER_NAME} -o json |jq '.provision.status' |cut -d'"' -f2`
+while [ "$PROVISION_STATUS" != "CLUSTER_PROVISION_COMPLETE" ]
+do
+  sleep 60
+  if [ $PROVISION_STATUS_ITERATIONS -ge 50 ];
+  then
+    break
+  fi
+  PROVISION_STATUS_ITERATIONS=$((PROVISION_STATUS_ITERATIONS+1))
+
+  PROVISION_STATUS=`./rctl get cluster ${CLUSTER_NAME} -o json |jq '.provision.status' |cut -d'"' -f2`
+
+  if [ $PROVISION_STATUS == "INFRA_CREATION_FAILED" ];
+  then
+    echo -e " !! Cluster provision failed !!  "
+    echo -e " !! Exiting !!  " && exit -1
+  fi
+
+  if [ $PROVISION_STATUS == "UPDATE_FAILED" ];
+  then
+    echo -e " !! Cluster Update failed !!  "
+    echo -e " !! Exiting !!  " && exit -1
+  fi
+
+  PROVISION_STATE=`./rctl get cluster ${CLUSTER_NAME} -o json | jq '.provision.running_state' |cut -d'"' -f2`
+
+  echo "$PROVISION_STATE in progress"
+done
