@@ -1,5 +1,7 @@
 #!/bin/bash
 
+RCTL_FILE="rctl-linux-amd64.tar.bz2"
+
 wget $RCTL_URL
 if [ $? -eq 0 ];
 then
