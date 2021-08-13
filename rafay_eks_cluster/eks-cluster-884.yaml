@@ -1,0 +1,38 @@
+kind: Cluster
+metadata:
+  name: rauto-infraprovisioner-eks-884
+  project: defaultproject
+spec:
+  blueprint: default
+  cloudprovider: rauto-cloudprovider-884
+  type: eks
+---
+apiVersion: rafay.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: rauto-infraprovisioner-eks-884
+  region: us-west-1
+  version: "1.19"
+nodeGroups:
+- amiFamily: AmazonLinux2
+  desiredCapacity: 1
+  iam:
+    withAddonPolicies:
+      albIngress: true
+      autoScaler: true
+      efs: true
+      externalDNS: true
+      imageBuilder: true
+  instanceType: t3.xlarge
+  maxSize: 1
+  minSize: 1
+  name: rauto-infraprovisioner-eks-884-ng
+  volumeSize: 80
+  volumeType: gp3
+vpc:
+  cidr: 192.168.0.0/16
+  clusterEndpoints:
+    privateAccess: true
+    publicAccess: false
+  nat:
+    gateway: Single
