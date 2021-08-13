@@ -7,8 +7,8 @@ resource "rafay_eks_cluster" "cluster" {
 resource "null_resource" "cluster" {
   provisioner "local-exec" {
     command = <<-EOT
-      chmod +x rafay_eks.sh
-      ./rafay_eks.sh
+      chmod +x check_cluster_status.sh
+      ./check_cluster_status.sh
     EOT
   }
 }
