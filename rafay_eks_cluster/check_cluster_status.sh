@@ -21,13 +21,13 @@ PROVISION_STATUS=`./rctl get cluster -p defaultproject ${CLUSTER_NAME} -o json |
 while [ "$CLUSTER_STATUS" != "READY" ]  &&  [ "$PROVISION_STATUS" != "CLUSTER_PROVISION_COMPLETE" ]
 do
   sleep 60
-  if [ $CLUSTER_STATUS_ITERATIONS -ge 50 ];
+  if [[ $CLUSTER_STATUS_ITERATIONS -ge 50 ]];
   then
     break
   fi
   CLUSTER_STATUS_ITERATIONS=$((CLUSTER_STATUS_ITERATIONS+1))
   CLUSTER_STATUS=`./rctl get cluster -p defaultproject ${CLUSTER_NAME} -o json |jq '.status'|cut -d'"' -f2`
-  if [ $CLUSTER_STATUS == "PROVISION_FAILED" ];
+  if [[ $CLUSTER_STATUS == "PROVISION_FAILED" ]];
   then
     echo -e " !! Cluster provision failed !!  "
     echo -e " !! Exiting !!  " && exit -1
@@ -35,13 +35,13 @@ do
 
   PROVISION_STATUS=`./rctl get cluster -p defaultproject ${CLUSTER_NAME} -o json |jq '.provision.status' |cut -d'"' -f2`
 
-  if [ $PROVISION_STATUS == "INFRA_CREATION_FAILED" ];
+  if [[ $PROVISION_STATUS == "INFRA_CREATION_FAILED" ]];
   then
     echo -e " !! Cluster provision failed !!  "
     echo -e " !! Exiting !!  " && exit -1
   fi
 
-  if [ $PROVISION_STATUS == "BOOTSTRAP_CREATION_FAILED" ];
+  if [[ $PROVISION_STATUS == "BOOTSTRAP_CREATION_FAILED" ]];
   then
     echo -e " !! Cluster provision failed !!  "
     echo -e " !! Exiting !!  " && exit -1
@@ -51,12 +51,12 @@ do
 
   echo "$PROVISION_STATE in progress"
 done
-if [ $CLUSTER_STATUS != "READY" ];
+if [[ $CLUSTER_STATUS != "READY" ]];
 then
     echo -e " !! Cluster provision failed !!  "
     echo -e " !! Exiting !!  " && exit -1
 fi
-if [ $CLUSTER_STATUS == "READY" ];
+if [[ $CLUSTER_STATUS == "READY" ]];
 then
     echo "[+] Cluster Provisioned Successfully waiting for it to be healthy"
     CLUSTER_HEALTH=`./rctl get cluster -p defaultproject ${CLUSTER_NAME} -o json | jq '.health' |cut -d'"' -f2`
@@ -64,7 +64,7 @@ then
     do
       echo "Iteration-${CLUSTER_HEALTH_ITERATIONS} : Waiting 60 seconds for cluster to be healthy..."
       sleep 60
-      if [ $CLUSTER_HEALTH_ITERATIONS -ge 15 ];
+      if [[ $CLUSTER_HEALTH_ITERATIONS -ge 15 ]];
       then
         break
       fi
@@ -88,7 +88,7 @@ PROVISION_STATUS=`./rctl get cluster -p defaultproject ${CLUSTER_NAME} -o json |
 while [ "$PROVISION_STATUS" != "CLUSTER_PROVISION_COMPLETE" ]
 do
   sleep 60
-  if [ $PROVISION_STATUS_ITERATIONS -ge 15 ];
+  if [[ $PROVISION_STATUS_ITERATIONS -ge 15 ]];
   then
     break
   fi
@@ -96,13 +96,13 @@ do
 
   PROVISION_STATUS=`./rctl get cluster -p defaultproject ${CLUSTER_NAME} -o json |jq '.provision.status' |cut -d'"' -f2`
 
-  if [ $PROVISION_STATUS == "INFRA_CREATION_FAILED" ];
+  if [[ $PROVISION_STATUS == "INFRA_CREATION_FAILED" ]];
   then
     echo -e " !! Cluster provision failed !!  "
     echo -e " !! Exiting !!  " && exit -1
   fi
 
-  if [ $PROVISION_STATUS == "UPDATE_FAILED" ];
+  if [[ $PROVISION_STATUS == "UPDATE_FAILED" ]];
   then
     echo -e " !! Cluster Update failed !!  "
     echo -e " !! Exiting !!  " && exit -1
