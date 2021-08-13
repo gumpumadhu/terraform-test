@@ -88,7 +88,7 @@ PROVISION_STATUS=`./rctl get cluster -p defaultproject ${CLUSTER_NAME} -o json |
 while [ "$PROVISION_STATUS" != "CLUSTER_PROVISION_COMPLETE" ]
 do
   sleep 60
-  if [ $PROVISION_STATUS_ITERATIONS -ge 50 ];
+  if [ $PROVISION_STATUS_ITERATIONS -ge 15 ];
   then
     break
   fi
