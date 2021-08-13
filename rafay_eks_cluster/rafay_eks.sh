@@ -80,6 +80,7 @@ if [[ $CLUSTER_HEALTH == 1 ]];
 then
     echo "[+] Cluster Provisioned Successfully and is Healthy"
 fi
+#Adding Sleep and re Verifying Provision Status as Cluster goes for Update after some time
 sleep 200
 PROVISION_STATUS=`./rctl get cluster ${CLUSTER_NAME} -o json |jq '.provision.status' |cut -d'"' -f2`
 while [ "$PROVISION_STATUS" != "CLUSTER_PROVISION_COMPLETE" ]
