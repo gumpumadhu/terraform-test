@@ -1,10 +1,5 @@
 #!/bin/bash
 
-RCTL_FILE="rctl-linux-amd64.tar.bz2"
-#RCTL_URL="https://rafay-prod-cli.s3-us-west-2.amazonaws.com/publish/rctl-linux-amd64.tar.bz2"
-#RCTL_URL="https://rctl.s3-us-west-1.amazonaws.com/origin/master-283/rctl-linux-amd64.tar.bz2"
-RCTL_URL="https://s3.amazonaws.com/rafay-cli/publish/rctl-linux-amd64.tar.bz2"
-
 wget $RCTL_URL
 if [ $? -eq 0 ];
 then
