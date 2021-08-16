@@ -5,6 +5,8 @@ metadata:
 spec:
   blueprint: default
   cloudprovider: rauto-cloudprovider-52316
+  cniprovider: aws-cni
+  proxyconfig: {}
   type: eks
 ---
 apiVersion: rafay.io/v1alpha5
