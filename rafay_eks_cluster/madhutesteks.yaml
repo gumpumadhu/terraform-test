@@ -1,6 +1,6 @@
 kind: Cluster
 metadata:
-  name: madhutesteks
+  name: madhutesteks1
   project: madhuair
 spec:
   blueprint: default
