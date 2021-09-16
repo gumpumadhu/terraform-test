@@ -1,7 +1,7 @@
 kind: Cluster
 metadata:
   name: infra-test-utkarsh
-  project: defaultproject
+  project: madhuair
 spec:
   blueprint: default
   cloudprovider: Utkarsh-AWS
