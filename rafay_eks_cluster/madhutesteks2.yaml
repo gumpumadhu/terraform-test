@@ -3,9 +3,8 @@ metadata:
   name: madhutesteks2
   project: dev1
 spec:
-  blueprint: eks-bp
-  blueprintversion: v0
-  cloudprovider: aws
+  blueprint: default
+  cloudprovider: stscluster
   type: eks
 ---
 apiVersion: rafay.io/v1alpha5
@@ -13,6 +12,8 @@ kind: ClusterConfig
 metadata:
   name: madhutesteks2
   region: us-west-1
+  tags:
+    madhu: tag123
   version: "1.18"
 nodeGroups:
 - amiFamily: AmazonLinux2
@@ -22,18 +23,17 @@ nodeGroups:
       autoScaler: true
       imageBuilder: true
   instanceType: t3.xlarge
+  labels:
+    madhul: l1
   maxSize: 2
   minSize: 1
-  name: ng-449cae37
-  ssh:
-    allow: true
-    publicKeyName: madhu
+  name: ng1
   volumeSize: 80
   volumeType: gp3
 vpc:
   cidr: 192.168.0.0/16
   clusterEndpoints:
-    privateAccess: false
-    publicAccess: true
+    privateAccess: true
+    publicAccess: false
   nat:
     gateway: Single
