@@ -1,10 +1,13 @@
 kind: Cluster
 metadata:
   name: madhutesteks1
-  project: madhuair
+  project: defaultproject
 spec:
   blueprint: default
-  cloudprovider: Utkarsh-AWS
+  cloudprovider: madhuaws-dummy
+  clusterConfig: null
+  cniprovider: aws-cni
+  proxyconfig: {}
   type: eks
 ---
 apiVersion: rafay.io/v1alpha5
@@ -23,7 +26,7 @@ nodeGroups:
   instanceType: t3.xlarge
   maxSize: 2
   minSize: 1
-  name: ng-fc10936a
+  name: ng-fa3ee599
   volumeSize: 80
   volumeType: gp3
 vpc:
